@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+	<Properties>
+		<Property name="appenderFormat">%d %-5p [%t] %C{1}.%M() (%F:%L) - %m%n
+		</Property>
+		<Property name="aopAppenderFormat">%d %-5p - %m%n</Property>
+		<Property name="appAppenderFormat">%d{dd MMM yyyy HH:mm:ss:SSS}, %m%n</Property>
+		<Property name="appFileNameFormat">${bundle:application:logging.location}/logs/app.log
+		</Property>
+		<Property name="appFileNamePatternFormat">${bundle:application:logging.location}/logs/$${date:yyyy-MM-dd}/app-%d{yyyy-MM-d-HH}-%i.log
+		</Property>
+		<Property name="fileNameFormat">${bundle:application:logging.location}/logs/app.log
+		</Property>
+		<Property name="fileNamePatternFormat">${bundle:application:logging.location}/logs/$${date:yyyy-MM-dd}/app-%d{yyyy-MM-dd_HH}-%i.log
+		</Property>
+	</Properties>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${appenderFormat}" />
+		</Console>
+		<Console name="AOPConsole" target="SYSTEM_OUT">
+			<PatternLayout pattern="${aopAppenderFormat}" />
+		</Console>
+		<RollingFile name="HourlyFileWriter" fileName="${fileNameFormat}"
+			filePattern="${fileNamePatternFormat}" append="true" bufferedIO="true"
+			immediateFlush="true">
+			<PatternLayout pattern="${appenderFormat}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="false" />
+				<SizeBasedTriggeringPolicy size="1 MB" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="AOPFileWriter" fileName="${fileNameFormat}"
+			filePattern="${fileNamePatternFormat}" append="true" bufferedIO="true"
+			immediateFlush="true">
+			<PatternLayout pattern="${aopAppenderFormat}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="false" />
+				<SizeBasedTriggeringPolicy size="1 MB" />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="AppFileWriter" fileName="${appFileNameFormat}"
+			filePattern="${appFileNamePatternFormat}" append="true" bufferedIO="true"
+			immediateFlush="true">
+			<PatternLayout pattern="${appAppenderFormat}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="false" />
+				<SizeBasedTriggeringPolicy size="1 MB" />
+			</Policies>
+		</RollingFile>
+		<Async name="ASYNC" includeLocation="true">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="HourlyFileWriter" />
+		</Async>
+	</Appenders>
+	<Loggers>
+		<Root level="info" includeLocation="true">
+			<AppenderRef ref="Console" />
+		</Root>
+		<Logger name="AppLogger" level="warn" additivity="false"
+			includeLocation="true">
+			<AppenderRef ref="AppFileWriter" />
+		</Logger>
+		<Logger name="com.jvyang" level="info" additivity="false"
+			includeLocation="true">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="AOPCoreLogger" level="warn" additivity="false"
+			includeLocation="true">
+			<AppenderRef ref="AOPConsole" />
+		</Logger>
+		<Logger name="org.springframework" additivity="false" level="info">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="java.sql" additivity="false" level="warn">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="org.hibernate" additivity="false" level="info">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="org.hibernate.SQL" additivity="false" level="info">
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="com.zaxxer.hikari" additivity="false" level="info">
+			<AppenderRef ref="Console" />
+		</Logger>
+	</Loggers>
+</Configuration>
