@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jvyang.core.model.FullName;
-import com.jvyang.core.model.Response;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LoginResponse extends Response
