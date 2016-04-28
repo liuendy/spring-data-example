@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jvyang.core.auth.UserAuthenticationService;
+import com.jvyang.core.config.properties.TokenProperties;
 import com.jvyang.core.model.Access;
 import com.jvyang.core.model.LoginModel;
 import com.jvyang.core.model.User;
@@ -36,6 +37,7 @@ public class AuthenticationController extends BaseController
 {
   @Autowired UserAuthenticationService authService;
   @Autowired TokenCreationService tokenService;
+  @Autowired TokenProperties tokenProperties;
 
   @PreAuthorize("isAuthenticated()")
   @RequestMapping(value = "/api/login", method = RequestMethod.GET)
@@ -78,6 +80,7 @@ public class AuthenticationController extends BaseController
 
     Cookie cookie = new Cookie(JwtFilter.AUTH_COOKIE_KEY, signedJWT.serialize());
     cookie.setHttpOnly(true);
+    cookie.setMaxAge(tokenProperties.getExpirationTime());
     response.addCookie(cookie);
 
     return ResponseEntity.ok(lr);
