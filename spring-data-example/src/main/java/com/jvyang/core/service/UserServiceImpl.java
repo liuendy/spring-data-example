@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService
   @Override
   public User getUser(String username)
   {
-    return userRepository.findOne(QUser.user.username.eq(username));
+    return userRepository.findOne(QUser.user.username.equalsIgnoreCase(username));
   }
 
   @Override

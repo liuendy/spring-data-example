@@ -1,4 +1,3 @@
-
 spring-data-example/.project
 
 spring-data-example/.classpath
@@ -6,7 +5,5 @@ spring-data-example/.classpath
 *.prefs
 
 *.component
-
-
 
 spring-data-example/.settings/org.eclipse.wst.common.project.facet.core.xml

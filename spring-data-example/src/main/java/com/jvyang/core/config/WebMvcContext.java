@@ -9,6 +9,7 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.security.access.AccessDeniedException;
@@ -74,6 +75,7 @@ class WebMvcContext extends WebMvcConfigurerAdapter
       public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config)
       {
         config.setBasePath("/api");
+        config.setDefaultMediaType(MediaType.APPLICATION_JSON_UTF8);
       }
     };
   }

@@ -102,8 +102,7 @@ public class Profile extends AuditableEntity
     }
 
     final Profile other = (Profile) otherObj;
-    return new EqualsBuilder().append(getId(), other.getId()).append(getId(), other.getId())
-        .append(getName(), other.getName()).isEquals();
+    return new EqualsBuilder().append(getId(), other.getId()).append(getName(), other.getName()).isEquals();
   }
 
   @Override

@@ -57,6 +57,8 @@ class PersistenceContext
     prop.put("hibernate.cache.region.factory_class", hibernateProperties.getCacheRegionFactoryClass());
     prop.put("hibernate.temp.use_jdbc_metadata_defaults", hibernateProperties.getUseJdbcMetadataDefaults());
     prop.put("hibernate.cache.region_prefix", hibernateProperties.getCacheRegionFactoryClass());
+    prop.put("hibernate.hbm2ddl.import_files", hibernateProperties.getImportFiles());
+    prop.put("hibernate.hbm2ddl.import_files_sql_extractor", "org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor");
 
     LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
     entityManagerFactoryBean.setDataSource(dataSource);

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class HibernateProperties
 {
   public static final String TO_STRING_FORMAT = "HibernateProperties [dialect=%s, "
-      + "hbm2ddlAuto=%s, ejbNamingStrategy=%s, showSql=%s, formatSql=%s, cacheRegionPrefix=%s]";
+      + "hbm2ddlAuto=%s, ejbNamingStrategy=%s, showSql=%s, formatSql=%s, cacheRegionPrefix=%s, importFiles=%s]";
 
   @Value("${hibernate.dialect}") private String dialect;
   @Value("${hibernate.hbm2ddl.auto}") private String hbm2ddlAuto;
@@ -17,6 +17,7 @@ public class HibernateProperties
   @Value("${hibernate.cache.region.factory_class}") private String cacheRegionFactoryClass;
   @Value("${hibernate.temp.use_jdbc_metadata_defaults}") private String useJdbcMetadataDefaults;
   @Value("${hibernate.cache.region_prefix}") private String cacheRegionPrefix;
+  @Value("${hibernate.hbm2ddl.import_files}") private String importFiles;
 
   public String getDialect()
   {
@@ -58,10 +59,15 @@ public class HibernateProperties
     return cacheRegionPrefix;
   }
 
+  public String getImportFiles()
+  {
+    return importFiles;
+  }
+
   @Override
   public String toString()
   {
     return String.format(TO_STRING_FORMAT, dialect, hbm2ddlAuto, physicalNamingStrategy, showSql, formatSql,
-        cacheRegionPrefix);
+        cacheRegionPrefix, importFiles);
   }
 }

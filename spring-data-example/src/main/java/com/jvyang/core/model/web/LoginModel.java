@@ -1,4 +1,4 @@
-package com.jvyang.core.model;
+package com.jvyang.core.model.web;
 
 import java.io.Serializable;
 

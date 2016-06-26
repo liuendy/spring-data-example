@@ -6,8 +6,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,8 +16,6 @@ import com.nimbusds.jwt.SignedJWT;
 @SuppressWarnings("serial")
 public class JwtToken implements Authentication
 {
-  protected final Logger L = LogManager.getLogger(getClass());
-
   private static final String ROLES_CLAIM_KEY = "roles";
 
   final SignedJWT sjwt;
